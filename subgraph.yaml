@@ -1,0 +1,38 @@
+specVersion: 1.0.0
+indexerHints:
+  prune: auto
+schema:
+  file: ./schema.graphql
+dataSources:
+  - kind: ethereum
+    name: Contract
+    network: sepolia
+    source:
+      address: "0xeA05DcD11639EC822A0CE24bC2CbcFdFC018f2D8"
+      abi: Contract
+      startBlock: 5698262
+    mapping:
+      kind: ethereum/events
+      apiVersion: 0.0.7
+      language: wasm/assemblyscript
+      entities:
+        - RequestFulfilled
+        - RequestSent
+        - lotteryAnnounceMent
+        - lotteryForceEnded
+        - winnerPicked
+      abis:
+        - name: Contract
+          file: ./abis/Contract.json
+      eventHandlers:
+        - event: RequestFulfilled(uint256,uint256[])
+          handler: handleRequestFulfilled
+        - event: RequestSent(uint256,uint32)
+          handler: handleRequestSent
+        - event: lotteryAnnounceMent(uint256,uint256,uint256,uint256,indexed uint256)
+          handler: handlelotteryAnnounceMent
+        - event: lotteryForceEnded(uint256)
+          handler: handlelotteryForceEnded
+        - event: winnerPicked(indexed address,uint256)
+          handler: handlewinnerPicked
+      file: ./src/contract.ts

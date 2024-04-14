@@ -1,0 +1,46 @@
+type RequestFulfilled @entity(immutable: true) {
+  id: Bytes!
+  requestId: BigInt! # uint256
+  randomWords: [BigInt!]! # uint256[]
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type RequestSent @entity(immutable: true) {
+  id: Bytes!
+  requestId: BigInt! # uint256
+  numWords: BigInt! # uint32
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type lotteryAnnounceMent @entity(immutable: true) {
+  id: Bytes!
+  counterNo: BigInt! # uint256
+  entranceFee: BigInt! # uint256
+  timeStamp: BigInt! # uint256
+  endTime: BigInt! # uint256
+  minplayers: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type lotteryForceEnded @entity(immutable: true) {
+  id: Bytes!
+  lotteryCounter: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
+
+type winnerPicked @entity(immutable: true) {
+  id: Bytes!
+  winner: Bytes! # address
+  lotteryCounter: BigInt! # uint256
+  blockNumber: BigInt!
+  blockTimestamp: BigInt!
+  transactionHash: Bytes!
+}
